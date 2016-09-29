@@ -1,0 +1,52 @@
+Brute Force
+===========
+
+local $ for i in {1..25} ; do rahash2 -D rot -S "s:$i" -s "OMQEMDUEQMEK" && echo "" ; done
+NLPDLCTDPLDJ
+MKOCKBSCOKCI
+LJNBJARBNJBH
+KIMAIZQAMIAG
+JHLZHYPZLHZF
+IGKYGXOYKGYE
+HFJXFWNXJFXD
+GEIWEVMWIEWC
+FDHVDULVHDVB
+ECGUCTKUGCUA
+DBFTBSJTFBTZ
+CAESARISEASY <==== english text
+BZDRZQHRDZRX
+AYCQYPGQCYQW
+ZXBPXOFPBXPV
+YWAOWNEOAWOU
+XVZNVMDNZVNT
+WUYMULCMYUMS
+VTXLTKBLXTLR
+USWKSJAKWSKQ
+TRVJRIZJVRJP
+SQUIQHYIUQIO
+RPTHPGXHTPHN
+QOSGOFWGSOGM
+PNRFNEVFRNFL
+
+
+Using Known Plaintext
+=====================
+
+remote $ mkdir /tmp/ccc-ol-krypton2
+remote $ cd /tmp/ccc-ol-krypton2
+remote $ ln -s /krypton/krypton2/keyfile.dat      # encrypt binary checks ./keyfile.dat
+remote $ echo A > A.txt
+remote $ /krypton/krypton2/encrypt A.txt
+remote $ cat ciphertext  && echo ""
+M
+
+NOTE: So 'A' becomes 'M'.
+
+local $ python -c 'print ord("M") - ord("A")'
+12
+
+NOTE: 'A' -> 'M' means we rotated by 12
+NOTE: rahash2 -D rot -S "s:12" decodes rot12, so no need to calculate the opposit of rot12
+
+local $ rahash2 -D rot -S "s:12" -s "OMQEMDUEQMEK" && echo ""
+CAESARISEASY

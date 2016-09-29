@@ -1,0 +1,63 @@
+local $ cat files/found* | tr -d '\n' | tr -d ' ' > all.txt
+local $ for char in {A..Z} ; do num=$(grep -o $char all.txt | wc -l) && echo "$num $char"; done | sort -n
+2 P
+4 H
+4 R
+12 O
+19 I
+28 F
+55 A
+60 L
+64 E
+67 K
+71 X
+75 T
+84 Y
+86 M
+129 W
+130 V
+132 Z
+210 D
+227 C
+227 G
+240 N
+246 B
+257 U
+301 J
+340 Q
+456 S
+
+=> https://en.wikipedia.org/wiki/Letter_frequency#Relative_frequencies_of_letters_in_the_English_language
+=> + check if the words make sense
+
+2 P   z
+4 H   q
+4 R   j
+12 O  x
+19 I  v
+28 F  k
+55 A  b
+60 L  y
+64 E  g
+67 K  w
+71 X  f
+75 T  m
+84 Y  p
+86 M  u
+129 W d
+130 V l
+132 Z c
+210 D h
+227 C i
+227 G n
+240 N r
+246 B o
+257 U s
+301 J t
+340 Q a
+456 S e
+
+$ cat all.txt | sed -e "s/P/z/g" -e "s/H/q/g" -e "s/R/j/g" -e "s/O/x/g" -e "s/I/v/g" -e "s/F/k/g" -e "s/A/b/g" -e "s/L/y/g" -e "s/E/g/g" -e "s/K/w/g" -e "s/X/f/g" -e "s/T/m/g" -e "s/Y/p/g" -e "s/M/u/g" -e "s/W/d/g" -e "s/V/l/g" -e "s/Z/c/g" -e "s/D/h/g" -e "s/C/i/g" -e "s/G/n/g" -e "s/N/r/g" -e "s/B/o/g" -e "s/U/s/g" -e "s/J/t/g" -e "s/Q/a/g" -e "s/S/e/g" && echo ""
+incryptographyacaesarcipheralsoknownasacaesarsciphertheshiftciphercaesarscodeorcaesarshiftisoneofthesimplestandmostwidelyknownencryptiontechniquesitisatypeofsubstitutioncipherinwhicheachletterintheplaintextisreplacedbyalettersomefixednumberofpositionsdownthealphabetforexamplewithashiftofawouldbereplacedbydbwouldbecomeeandsoonthemethodisnamedafterjuliuscaesarwhousedittocommunicatewithhisgeneralstheencryptionstepperformedbyacaesarcipherisoftenincorporatedaspartofmorecomplexschemessuchasthevigenrecipherandstillhasmodernapplicationintherotsystemaswithallsinglealphabetsubstitutionciphersthecaesarcipheriseasilybrokenandinpracticeoffersessentiallynocommunicationsecurityshakespeareproducedmostofhisknownworkbetweenandhisearlyplaysweremainlycomediesandhistoriesgenresheraisedtothepeakofsophisticationandartistrybytheendofthesixteenthcenturynexthewrotemainlytragediesuntilaboutincludinghamletkinglearandmacbethconsideredsomeofthefinestexamplesintheenglishlanguageinhislastphasehewrotetragicomediesalsoknownasromancesandcollaboratedwithotherplaywrightsmanyofhisplayswerepublishedineditionsofvaryingqualityandaccuracyduringhislifetimeandintwoofhisformertheatricalcolleaguespublishedthefirstfolioacollectededitionofhisdramaticworksthatincludedallbuttwooftheplaysnowrecognisedasshakespearesalthoughnoattendancerecordsfortheperiodsurvivemostbiographersagreethatshakespearewaseducatedatthekingsnewschoolinstratfordafreeschoolcharteredinaboutaquarterofamilefromhishomegrammarschoolsvariedinqualityduringtheelizabethanerabutthecurriculumwasdictatedbylawthroughoutenglandandtheschoolwouldhaveprovidedanintensiveeducationinlatingrammarandtheclassicsattheageofshakespearemarriedtheyearoldannehathawaytheconsistorycourtofthedioceseofworcesterissuedamarriagelicenceonnovembertwoofhathawaysneighbourspostedbondsthenextdayassuretythattherewerenoimpedimentstothemarriagethecouplemayhavearrangedtheceremonyinsomehastesincetheworcesterchancellorallowedthemarriagebannstobereadonceinsteadoftheusualthreetimesannespregnancycouldhavebeenthereasonforthissixmonthsafterthemarriageshegavebirthtoadaughtersusannawhowasbaptisedonmaytwinssonhamnetanddaughterjudithfollowedalmosttwoyearslaterandwerebaptisedonfebruaryhamnetdiedofunknowncausesattheageofandwasburiedonaugustafterthebirthofthetwinstherearefewhistoricaltracesofshakespeareuntilheismentionedaspartofthelondontheatresceneinbecauseofthisgapscholarsrefertotheyearsbetweenandasshakespeareslostyearsbiographersattemptingtoaccountforthisperiodhavereportedmanyapocryphalstoriesnicholasroweshakespearesfirstbiographerrecountedastratfordlegendthatshakespearefledthetownforlondontoescapeprosecutionfordeerpoachinganothereighteenthcenturystoryhasshakespearestartinghistheatricalcareermindingthehorsesoftheatrepatronsinlondonjohnaubreyreportedthatshakespearehadbeenacountryschoolmastersometwentiethcenturyscholarshavesuggestedthatshakespearemayhavebeenemployedasaschoolmasterbyalexanderhoghtonoflancashireacatholiclandownerwhonamedacertainwilliamshakeshafteinhiswillnoevidencesubstantiatessuchstoriesotherthanhearsaycollectedafterhisdeathhereuponlegrandarosewithagraveandstatelyairandbroughtmethebeetlefromaglasscaseinwhichitwasencloseditwasabeautifulscarabaeusandatthattimeunknowntonaturalistsofcourseagreatprizeinascientificpointofviewthereweretworoundblackspotsnearoneextremityofthebackandalongoneneartheotherthescaleswereexceedinglyhardandglossywithalltheappearanceofburnishedgoldtheweightoftheinsectwasveryremarkableandtakingallthingsintoconsiderationicouldhardlyblamejupiterforhisopinionrespectingit
+$ cat files/krypton4 | sed -e "s/P/z/g" -e "s/H/q/g" -e "s/R/j/g" -e "s/O/x/g" -e "s/I/v/g" -e "s/F/k/g" -e "s/A/b/g" -e "s/L/y/g" -e "s/E/g/g" -e "s/K/w/g" -e "s/X/f/g" -e "s/T/m/g" -e "s/Y/p/g" -e "s/M/u/g" -e "s/W/d/g" -e "s/V/l/g" -e "s/Z/c/g" -e "s/D/h/g" -e "s/C/i/g" -e "s/G/n/g" -e "s/N/r/g" -e "s/B/o/g" -e "s/U/s/g" -e "s/J/t/g" -e "s/Q/a/g" -e "s/S/e/g"
+welld oneth eleve lfour passw ordis brute

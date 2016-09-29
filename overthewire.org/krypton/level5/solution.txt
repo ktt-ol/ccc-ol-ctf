@@ -1,0 +1,70 @@
+=> basically last level, but with unknown key length
+=> let's try to find the key length
+=> https://en.wikipedia.org/wiki/Kasiski_examination
+
+local $ ./findpatterns files/found1 7
+pattern: CMRHEFZ (dist = 63)
+pattern: MRHEFZA (dist = 63)
+pattern: RHEFZAL (dist = 63)
+pattern: QTXJGLA (dist = 135)
+pattern: TXJGLAR (dist = 90)
+pattern: TXJGLAR (dist = 135)
+pattern: XJGLARI (dist = 90)
+pattern: XJGLARI (dist = 135)
+pattern: MGCTZDL (dist = 45)
+pattern: GCTZDLC (dist = 45)
+pattern: JGLARIQ (dist = 45)
+pattern: VZPHCXF (dist = 540)
+pattern: ZPHCXFP (dist = 540)
+pattern: XUQPYYH (dist = 288)
+local $ ./findpatterns files/found2 7
+pattern: DLCCSLG (dist = 1116)
+pattern: LCCSLGE (dist = 1116)
+pattern: CCSLGEN (dist = 1116)
+pattern: CSLGENO (dist = 1116)
+pattern: SLGENOS (dist = 1116)
+pattern: LGENOSP (dist = 1116)
+pattern: GENOSPR (dist = 1116)
+pattern: ENOSPRI (dist = 1116)
+pattern: AEFYXUQ (dist = 585)
+pattern: EFYXUQI (dist = 585)
+pattern: FYXUQIP (dist = 585)
+pattern: YXUQIPD (dist = 585)
+pattern: PUGJYVB (dist = 36)
+pattern: PUGJYVB (dist = 117)
+pattern: PUGJYVB (dist = 144)
+pattern: PUGJYVB (dist = 540)
+pattern: IPESPUG (dist = 81)
+pattern: PESPUGJ (dist = 81)
+pattern: ESPUGJY (dist = 81)
+pattern: SPUGJYV (dist = 81)
+local $ ./findpatterns files/found3 7
+pattern: MQESOGL (dist = 234)
+pattern: GKESCSL (dist = 126)
+pattern: KESCSLD (dist = 126)
+pattern: ESCSLDF (dist = 126)
+pattern: SCSLDFN (dist = 126)
+pattern: CSLDFNT (dist = 126)
+pattern: SLDFNTD (dist = 126)
+
+=> found distances: 36, 45, 63, 81, 90, 126, 135, 234, 288, 540, 585
+=> prime factor partitioning will show, that each of those contains 3*3
+=> key length is probably 9
+=> let's try previous attack
+
+=> concat everything incl. padding (mod 9) into all.txt
+
+local $ for i in {0..8} ; do ./analyse all.txt $i | sort -n | tail -n1 | awk '{print $2}' | tr -d '\n' ; done && echo ""
+OICPIRKXL
+
+=> let's try the key
+
+local $ ./decode all.txt OICPIRKXL
+key: OICPIRKXL
+ITWASTHEB ESTOFTIME SITWASTHE [...]
+
+=> YAY!
+
+local $ ./decode files/krypton6 OICPIRKXL           
+key: OICPIRKXL
+RANDOM

@@ -1,0 +1,2 @@
+shell $ rahash2 -D rot -S "s:13" -s "YRIRY GJB CNFFJBEQ EBGGRA" && echo ""
+LEVEL TWO PASSWORD ROTTEN

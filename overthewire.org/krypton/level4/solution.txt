@@ -1,0 +1,66 @@
+=> key length is 6
+=> concat files with padding
+
+local $ cat files/found1 | tr -d ' ' | wc -c
+1450
+local $ python -c "print 1450 % 6"
+4
+
+=> we need (6 - 4) = 2 bytes padding
+
+local $ echo -n "AA" > padding.txt
+local $ cat files/found1 padding.txt files/found2 | tr -d '\n' | tr -d ' ' > all.txt
+
+=> build tools
+local $ make
+
+=> find candidate for 'E' (most common char)
+local $ for i in {0..5} ; do echo "Position $i"; ./analyse all.txt $i | sort -n | tail -n10 ; done
+
+=> just print most likely key
+local $ for i in {0..5} ; do ./analyse all.txt $i | sort -n | tail -n1 | awk '{print $2}' | tr -d '\n' ; done && echo ""
+JVIOIC
+
+local $ ./decode all.txt JVIOIC
+key: JVIOIC
+THESOL DIERWI THTHEG REENWH [...]
+
+=> YAY! (The soldier with the green wh[...])
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+=> (we initially got used the wrong key, it can be verified by checking for unlikely chars)
+=> so we used more statistics to check our key, let's assume we found JVAOIC instead
+
+=> let's check if first character sounds likely by checking how many instances of unlikely chars we find
+=> character being one of {jxqz} is 0.074%+0.095%+0.150%+0.153% = 0.472%
+=> we should not find more than a couple of them
+
+# just get number of total characters
+./decode all.txt JVAOIC | grep -o "[A-Z]" | wc -l
+3913
+# number of unlikely characters after decoding the text with out keys
+./decode all.txt JVAOIC | grep -o "[JXQZ]" | wc -l
+107
+# percentage of unlikely characters in the text
+python -c "print 107 / 3913.0"
+0.027344748275
+
+=> 2.7344748275%
+=> should be around 0.5%, so we have roughly 5 times as many unlikely characters as usual
+
+=> let's try to find if unlikely character can be connected to a modulo position
+./decode all.txt JVAOIC | grep -o "\<[JXQZ]" | wc -l && \
+./decode all.txt JVAOIC | grep -o "\<.[JXQZ]" | wc -l && \
+./decode all.txt JVAOIC | grep -o "\<..[JXQZ]" | wc -l && \
+./decode all.txt JVAOIC | grep -o "\<...[JXQZ]" | wc -l && \
+./decode all.txt JVAOIC | grep -o "\<....[JXQZ]" | wc -l && \
+./decode all.txt JVAOIC | grep -o "\<.....[JXQZ]" | wc -l
+2
+0
+99
+4
+0
+4
+
+=> 3rd character is obviously wrong

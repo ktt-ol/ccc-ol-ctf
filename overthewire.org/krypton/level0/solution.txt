@@ -1,0 +1,2 @@
+shell $ rahash2 -D base64 -s "S1JZUFRPTklTR1JFQVQ="
+KRYPTONISGREAT

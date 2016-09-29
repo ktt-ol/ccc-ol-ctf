@@ -1,0 +1,24 @@
+Bruteforce solution
+===================
+
+=> we have a binary, which encrypts stuff for us
+=> we have a file with encrypted content
+
+=> info suggests, that we have full byte range, let's test that first!
+=> just write some byte into an input file (e.g. using echo), encode it and check the output file
+=> only bytes from 65-90 (A-Z) and 97-122 (a-z) are encoded
+=> a-z is handled like it's capital letter
+=> it's enough to work on A-Z
+
+=> now let's verify the stream behaviour
+=> result: if first character is "A", then it's always encoded the same way
+=> let's just encode 26 input files with all possible letter's and check which one results in the correct output byte from the ciphertext
+
+=> once we found the first byte we do the same for the second byte
+=> ...
+
+=> the logic is implemented in bruteforce.py
+
+=> requires worst case 26*len(cipertext) encode runs
+=> more likely are 26/2*len(ciphertext)
+=> less than 200 runs, completes in less than a second
