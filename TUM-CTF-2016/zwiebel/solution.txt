@@ -1,0 +1,30 @@
+zwiebel contains the binary from the challenge (category = rev, points = 50).
+Only other hints: zwiebel = German word for onion.
+
+
+
+Solution:
+The binary reads a string "Input key:" from stdin in its main() function.
+Then it jumps into data section to obj.shc where bit 7 of the first byte
+is checked (must be set). If the check fails a ":(" smily is printed and
+the binary exits. If the check is successful, some data is XOR'd and
+then the previously XOR'd data is executed. (After being XOR'd) the executed
+data looks similar to the previous blocks, except that it checks another
+byte/bit and XORs/jumps to a different block. After manually stepping through
+a few blocks it's obvious, that the decoding must be automated.
+
+Such an auto-decoder can be found in get-flag.py, which uses radare's
+r2pipe python binding to extract the flag. On my Thinkpad X250 it needs
+a couple of seconds to extract the flag by analysing all 1603 onion layers:
+
+PIDPATH: [...]/zwiebel
+= attach [PID] [PID]
+bin.baddr 0x00400000
+Assuming filepath [...]/zwiebel
+asm.bits 64
+= attach [PID] 1
+starting key extraction...
+processed layer: 1603
+Error: Could not extract more key information
+
+Flag: hxp{1_h0p3_y0u_d1dnt_p33l_th3_0ni0n_by_h4nd}
