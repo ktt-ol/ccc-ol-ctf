@@ -1,0 +1,10 @@
+> create tex copy-flag
+
+[paste copy-flag.tex]
+
+\q
+
+> compile copy-flag
+
+> show log flag
+FLAG-FOO-BAR 
